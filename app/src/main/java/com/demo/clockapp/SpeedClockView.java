@@ -11,7 +11,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
 
-public class ClockView extends View {
+public class SpeedClockView extends View {
 
     private int height, width = 0;
     private int padding = 0;
@@ -33,11 +33,11 @@ public class ClockView extends View {
     private int centerRadius = 12;
     Rect rect = new Rect();
 
-    public ClockView(Context context) {
+    public SpeedClockView(Context context) {
         super(context);
     }
 
-    public ClockView(Context context, AttributeSet attributeSet) {
+    public SpeedClockView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
     }
 

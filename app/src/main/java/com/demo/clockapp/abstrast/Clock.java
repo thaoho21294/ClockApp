@@ -3,9 +3,11 @@ package com.demo.clockapp.abstrast;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.graphics.Shader;
 import android.view.View;
 
 public abstract class Clock extends View{
@@ -21,6 +23,9 @@ public abstract class Clock extends View{
 
     private int[] numbers;
 
+    public Clock(Context context) {
+        super(context);
+    }
 
     public int getFontSize() {
         return radius / 10;
@@ -42,12 +47,12 @@ public abstract class Clock extends View{
         return Math.PI / 2 / getUnitAngle();
     }
 
-    public Clock(Context context) {
-        super(context);
-    }
-
     public int getNumberDelta() {
         return numbers[1] - numbers[0];
+    }
+
+    public void setCanvas(Canvas _canvas) {
+        canvas = _canvas;
     }
 
     public void init() {
@@ -57,6 +62,14 @@ public abstract class Clock extends View{
     }
 
     public void drawEdge() {
+        LinearGradient linearGradient = new LinearGradient(0, radius * 2, radius * 2, 0,
+                new int[]{
+                        Color.BLACK,
+                        Color.WHITE,
+                        Color.BLACK},
+                new float[]{0, 0.5f, 1},
+                Shader.TileMode.MIRROR);
+        paint.setShader(linearGradient);
         paint.setStrokeWidth(edgeWidth);
         paint.setStyle(Paint.Style.STROKE);
 
@@ -76,6 +89,8 @@ public abstract class Clock extends View{
     }
 
     public void drawFace() {
+        LinearGradient linearGradient = new LinearGradient(0, getFaceRadius() * 2, 0, 0, Color.BLACK, Color.GRAY, Shader.TileMode.MIRROR);
+        paint.setShader(linearGradient);
         paint.setStyle(Paint.Style.FILL);
 
         canvas.drawCircle(center.x, center.y, getFaceRadius(), paint);
@@ -92,7 +107,7 @@ public abstract class Clock extends View{
         paint.reset();
     }
 
-    public void drawNumberal() {
+    public void drawNumeral() {
         int faceRadius = getFaceRadius();
         int textX, textY;
         double angle;
@@ -159,7 +174,7 @@ public abstract class Clock extends View{
         paint.reset();
     }
 
-    public void drawdrawHand(double number) {
+    public void drawHand(double number) {
         double angle = (number / getNumberDelta() + getAdditionalNumber()) * getUnitAngle();
         int handTruncation = edgeWidth * 2;
         int handRadius = radius - handTruncation;
@@ -191,7 +206,7 @@ public abstract class Clock extends View{
         paint.reset();
     }
 
-    public void drawGreenPoint(Canvas canvas, double number) {
+    public void drawGreenPoint(double number) {
         paint.reset();
         paint.setColor(Color.GREEN);
         paint.setStrokeWidth(10);

@@ -6,4 +6,4 @@ A app for showing car information
 # Screen
 the current screen (changed 15/10/2017)
 
-![Clock App screenshot as of 2017/10/15](docs/screenshot/clockScreen2.PNG)
+![Clock App screenshot as of 2017/10/15](docs/screenshot/clockScreen3.PNG)

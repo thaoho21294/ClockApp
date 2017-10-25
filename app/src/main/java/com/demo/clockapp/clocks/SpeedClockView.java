@@ -1,4 +1,4 @@
-package com.demo.clockapp;
+package com.demo.clockapp.clocks;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -8,25 +8,26 @@ import android.util.AttributeSet;
 
 import com.demo.clockapp.abstrast.ClockView;
 
-public class AccelClockView extends ClockView {
+public class SpeedClockView extends ClockView {
 
-    public AccelClockView(Context context) {
+    public SpeedClockView(Context context) {
         super(context);
     }
-    public AccelClockView(Context context, AttributeSet attributeSet) {
+
+    public SpeedClockView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
     }
 
     public void initClock(Canvas _canvas) {
-        double[] numbers = {0, 0.2, 0.4, 0.6, 0.8, 1, -1, -0.8, -0.6, -0.4, -0.2};
+        double[] numbers = {0, 24, 47, 71, 95, 118, 142, 166, 189};
 
         isInit = true;
         init();
         canvas = _canvas;
         radius = 80;
-        center = new Point(290, 90);
-        currentNumber = 0;
-        goodNumber = -0.5;
+        center = new Point(90, 90);
+        currentNumber = 172;
+        goodNumber = 160;
         setNumbers(numbers);
     }
 
@@ -39,8 +40,8 @@ public class AccelClockView extends ClockView {
     }
 
     public void drawInfo() {
-        String title = "Accel";
-        String unit = "g";
+        String title = "Speed";
+        String unit = "km/h";
         int titleFontSize = 12;
         int numberFontSize = 14;
         int unitFontSize = 12;
@@ -52,11 +53,10 @@ public class AccelClockView extends ClockView {
 
         paint.setColor(Color.YELLOW);
         paint.setTextSize(numberFontSize);
-        canvas.drawText(Double.toString(currentNumber), center.x - 10, center.y - getFaceRadius() / 2 + numberFontSize + padding, paint);
+        canvas.drawText(Double.toString(currentNumber), center.x - 16, center.y - getFaceRadius() / 2 + numberFontSize + padding, paint);
 
         paint.setColor(Color.LTGRAY);
         paint.setTextSize(unitFontSize);
-        canvas.drawText(unit, center.x - 10, center.y + getFaceRadius() / 2, paint);
+        canvas.drawText(unit, center.x - 14, center.y + getFaceRadius() / 2, paint);
     }
-
 }
